@@ -1,0 +1,67 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+}
+
+
+body{
+    background-color: #DEE2E6;
+}
+
+body .app-content .btn{
+    background-color: #00ACAC;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    
+}
+
+body .app-content .btn a{
+    text-decoration: none;
+    color: #007273;
+    margin: 0;
+}
+
+
+
+.pace {
+    display: none;
+}
+
+.main-style {
+    min-height: 100vh;
+    background: url(../img/cover/cover-scrum-board.png) no-repeat fixed;
+    background-size: 360px;
+    background-position: right bottom;
+}
+
+/* style the main section */
+
+.tasks button{
+    background-color: #fff;
+    border: none;
+    border-bottom: 1px solid #DEE2E6;
+    width: 100%;
+    display: flex;
+    padding: .5rem;
+}
+
+.tasks button .icon {
+    margin-right: .5rem;
+    color: #08aa5c;
+}
+
+.tasks button .modal-card .title-one{
+    font-size: .9rem;
+    font-weight: 600;
+}
+
+.tasks button .modal-card .creation{
+    color: #948797;
+    font-size: .8rem;
+}
+
+.tasks button .modal-card .having{
+    color: #514F4F;
+    font-size: .8rem;
+}
