@@ -44,6 +44,7 @@ body .app-content .btn a{
     width: 100%;
     display: flex;
     padding: .5rem;
+    margin-bottom: .7rem;
 }
 
 .tasks button .icon {
