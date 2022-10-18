@@ -8,6 +8,7 @@ let inputDate = document.getElementById("date");
 let selectOption = document.getElementById("inputGroupSelect");
 let selectPriority = document.querySelector(".select-priority");
 
+
 let countTodo = 0;
 let countProgresse = 0;
 let countDone = 0;
@@ -20,6 +21,7 @@ var tasks = [
         'status'        :   'To Do',
         'date'          :   '2022-10-08',
         'description'   :   `There is hardly anything more frustrating than having to look for current requirements in tens of comments under the actual description or having to decide which commenter is actually authorized to change the requirements. The goal here is to keep all the up-to-date requirements and details in the main/primary description of a task. Even though the information in comments may affect initial criteria, just update this primary description accordingly.`,
+        'id': '1',
     },
     {
         'title'         :   'Consider creating an acceptance criteria list',
@@ -32,6 +34,7 @@ var tasks = [
         b) Popup appears with two buttons: “This year” and “Last year”
         c) If user clicked on “Last year” download is initiated
         d) CSV downloaded includes following columns…`,
+        'id': '2',
     },
     {
         'title'         :   'Provide mockups',
@@ -40,6 +43,7 @@ var tasks = [
         'status'        :   'To Do',
         'date'          :   '2022-10-08',
         'description'   :   `A textual requirements description is essential in most cases, but an image is often worth more than a thousand words. Even a simple mockup can limit misunderstandings by a great factor. There are many apps out there that might be helpful here, like Balsamiq, InVision or Mockingbird, but manipulating screenshots of an existing app also works.`,
+        'id': '3',
     },
     {
         'title'         :   'Provide examples, credentials, etc',
@@ -48,6 +52,7 @@ var tasks = [
         'status'        :   'To Do',
         'date'          :   '2022-10-08',
         'description'   :   `If the expectation is to process or generate some file — attach an example of such a file. If the goal is to integrate what is being developed with some service, ensure your devs have access to this service and its documentation. This list could go on and on — the bottom line is — if there is something that our developer might make use of, try to foresee it and provide them with (access to) it.`,
+        'id': '4',
     },
     {
         'title'         :   'Annotate',
@@ -56,6 +61,7 @@ var tasks = [
         'status'        :   'To Do',
         'date'          :   '2022-10-08',
         'description'   :   `The mockup provided can sometimes be confusing for developers. Especially if it contains much more content than the scope of the task described. Drop a couple of arrows, outlines and annotations here and there to emphasize what are the important parts of the mockup from the task requirements perspective.`,
+        'id': '5',
     },
     {
         'title'         :   'Use charts and diagrams',
@@ -64,6 +70,7 @@ var tasks = [
         'status'        :   'To Do',
         'date'          :   '2022-10-08',
         'description'   :   `While it is not always necessary, sometimes it might be beneficial to prepare a flowchart, a block diagram or some other kind of concept visualization that will render it easy for the developer to comprehend the task and its scope.`,
+        'id': '6',
     },
     {
         'title'         :   'Spoil your developers with details',
@@ -72,6 +79,7 @@ var tasks = [
         'status'        :   'To Do',
         'date'          :   '2022-10-08',
         'description'   :   `It is always safer to assume less rather than more domain knowledge in the dev team. Therefore following the KISS principle and augmenting each description or acceptance criteria list with contextual/domain knowledge and details that might become relevant is highly recommended.`,
+        'id': '7',
     },
     {
         'title'         :   'Describe edge cases and provide constraints',
@@ -80,6 +88,7 @@ var tasks = [
         'status'        :   'In Progress',
         'date'          :   '2022-10-08',
         'description'   :   `Hardly any developer likes constraints, but if there are some, let them be communicated early. Do we need to support some specific browsers? Does this script need to run below a specific amount of time? Is it crucial for this endpoint to respond in no more than n milliseconds? If there are some such concerns, make sure they are included in your descriptions. Also describing any edge cases might be beneficial. Maybe we have some query limit on a given service? If you have such knowledge it is always beneficial for your devs to know about it upfront.`,
+        'id': '8',
     },
     {
         'title'         :   'Provide a copy',
@@ -88,6 +97,7 @@ var tasks = [
         'status'        :   'In Progress',
         'date'          :   '2022-10-08',
         'description'   :   `If there is a long message to be displayed, just provide a copy for it somewhere in the description. Do not place it on mockups as it is always slower and more error-prone to re-type it than to copy-paste it.`,
+        'id': '9',
     },
     
     {
@@ -96,7 +106,8 @@ var tasks = [
         'priority'      :   'High',
         'status'        :   'In Progress',
         'date'          :   '2022-10-08',
-        'description'   :   `including as many details as possible.`,
+        'description'   :   `including as many details as possible. `,
+        'id': '10',
     },
     {
         'title'         :   'Provide access',
@@ -105,6 +116,7 @@ var tasks = [
         'status'        :   'In Progress',
         'date'          :   '2022-10-08',
         'description'   :   `to the affected account and services if possible. It might be hard to reproduce the exact environment on a local machine.`,
+        'id': '11',
     },
     {
         'title'         :   'Provide environment information',
@@ -113,6 +125,7 @@ var tasks = [
         'status'        :   'In Progress',
         'date'          :   '2022-10-08',
         'description'   :   `i.e., browser version, operating system version etc. Sometimes a list of installed browser plugins and extensions might be helpful as well.`,
+        'id': '12',
     },
     {
         'title'         :   'Provide a link to an exception and/or a stack trace',
@@ -121,6 +134,7 @@ var tasks = [
         'status'        :   'In Progress',
         'date'          :   '2022-10-08',
         'description'   :   `as investigating those is usually the first step to take in resolving the problem.`,
+        'id': '13',
     },
     {
         'title'         :   'Provide access to logs',
@@ -129,6 +143,7 @@ var tasks = [
         'status'        :   'Done',
         'date'          :   '2022-10-08',
         'description'   :   `as they can be helpful in reproducing the steps that caused the problem in the first place.`,
+        'id': '14',
     },
     {
         'title'         :   'Provide access to the affected server or database dump',
@@ -137,6 +152,7 @@ var tasks = [
         'status'        :   'Done',
         'date'          :   '2022-10-08',
         'description'   :   `If it is possible and when it does not violate security policies, it is usually helpful for the developer to access the original data that might have played a role in the problem.`,
+        'id': '15',
     },
     {
         'title'         :   'Make a screencast',
@@ -145,6 +161,7 @@ var tasks = [
         'status'        :   'Done',
         'date'          :   '2022-10-08',
         'description'   :   `It is not always necessary, but many times a short screencast (or at least a screenshot) says more than a thousand words. While working on MacOS you can use QuickTime Player for the purpose but there are plenty of tools available for other operating systems as well.`,
+        'id': '16',
     },
     {
         'title'         :   'Provide contact information',
@@ -153,6 +170,7 @@ var tasks = [
         'status'        :   'Done',
         'date'          :   '2022-10-08',
         'description'   :   `of the person that reported the bug. This will not always be possible, but in some cases it might be advantageous and most effective if a developer can have a chat with a person that actually experienced the bug, especially if the steps to reproduce a problem are not deterministic.`,
+        'id': '17',
     },
 ];
 
@@ -175,6 +193,7 @@ function readData(){
     doneTaskBtn.innerHTML = "";
     for(let i = 0; i < tasks.length; i++){
         if(tasks[i].status == "To Do"){
+            countTodo++;
             todoTasksBtn.innerHTML += `
             <button class="rounded-top">
             <div class="icon">
@@ -183,18 +202,20 @@ function readData(){
             <div class="modal-card text-start">
                 <div class="title-one">${tasks[i].title}</div>
                 <div class="">
-                    <div class="creation">created in ${tasks[i].date}</div>
+                    <div class="creation"><span id="order-card-todo">#${countTodo}</span> created in ${tasks[i].date}</div>
                     <div class="having my-1">${tasks[i].description}</div>
                 </div>
-                <div class="buttons my-1">
+                <div class="buttons my-1 d-flex justify-content-between">
                     <span class="btn text-white bg-primary">${tasks[i].type}</span>
                     <span class="btn  bg-light">${tasks[i].priority}</span>
+                    <span class="btn text-white bg-info rounded-pill" id="modify"><i class="fa-sharp fa-solid fa-user-pen"></i></span>
+                    <span class="btn text-white bg-danger rounded-pill" id="delete"><i class="fa-solid fa-trash"></i></span>
                 </div>
             </div>
             </button>
        `
-       countTodo++;
     }else if(tasks[i].status == "In Progress"){
+        countProgresse++;
         document.querySelector("#progresse-tasks").innerHTML += `
         <button class="rounded-top">
         <div class="icon">
@@ -203,18 +224,20 @@ function readData(){
         <div class="modal-card text-start">
             <div class="title-one">${tasks[i].title}</div>
             <div class="">
-                <div class="creation">created in ${tasks[i].date}</div>
+                <div class="creation"><span id="order-card-progress">#${countProgresse}</span> created in ${tasks[i].date}</div>
                 <div class="having my-1">${tasks[i].description}</div>
             </div>
-            <div class="buttons my-1">
+            <div class="buttons my-1 d-flex justify-content-between">
                 <span class="btn text-white bg-primary">${tasks[i].type}</span>
                 <span class="btn  bg-light">${tasks[i].priority}</span>
+                <span class="btn text-white bg-info rounded-pill" id="modify"><i class="fa-sharp fa-solid fa-user-pen"></i></span>
+                <span class="btn text-white bg-danger rounded-pill" id="delete"><i class="fa-solid fa-trash"></i></span>
             </div>
         </div>
         </button>
    `
-   countProgresse++;
     }else{
+        countDone++;
         document.querySelector("#done-tasks").innerHTML += `
         <button class="rounded-top">
         <div class="icon">
@@ -223,12 +246,15 @@ function readData(){
         <div class="modal-card text-start">
             <div class="title-one">${tasks[i].title}</div>
             <div class="">
-                <div class="creation">created in ${tasks[i].date}</div>
+                <div class="creation"><span id="order-card-done">#${countDone}</span> created in ${tasks[i].date}</div>
                 <div class="having my-1">${tasks[i].description}</div>
             </div>
-            <div class="buttons my-1">
+            <div class="buttons my-1 d-flex justify-content-between">
                 <span class="btn text-white bg-primary">${tasks[i].type}</span>
                 <span class="btn  bg-light">${tasks[i].priority}</span>
+                <span class="btn text-white bg-info rounded-pill" id="modify"><i class="fa-sharp fa-solid fa-user-pen"></i></span>
+                <span class="btn text-white bg-danger rounded-pill" id="delete"><i class="fa-solid fa-trash"></i></span>
+                
             </div>
         </div>
         </button>
@@ -286,16 +312,23 @@ function readData(){
 
 
 
-    countDone++;
+    
     }
     
     }
 }
 
+function clearFormData() {
+    recipent.value = '';
+    selectPriority.value = '';
+    selectOption.value = '';
+    inputDate.value = '';
+    description.value = '';
+}
+
 
 function addTask() {
     closeBtn.click();
-
     const newTasks = {
         title: recipent.value,
         type: inputRadio.value,
@@ -316,126 +349,16 @@ function addTask() {
 
     readData();
 
-   
-
-
-//     if(selectOption.value == 1){
-//         document.querySelector(".to-do-tasks").innerHTML += `
-//         <button class="rounded-top">
-//         <div class="icon">
-//             <i class="fa-regular fa-circle-question fa-1x"></i>
-//         </div>
-//         <div class="modal-card text-start">
-//             <div class="title-one">${recipent.value}</div>
-//             <div class="">
-//                 <div class="creation">created in ${inputDate.value}</div>
-//                 <div class="having my-1">${description.value}</div>
-//             </div>
-//             <div class="buttons my-1">
-//                 <span class="btn text-white bg-primary">${selectOption.value}</span>
-//                 <span class="btn  bg-light">${inputRadio.value}</span>
-//             </div>
-//         </div>
-//         </button>
-//    `
-//     }else if(selectOption.value == 2){
-//         document.querySelector(".progresse-tasks").innerHTML += `
-//         <button class="rounded-top">
-//         <div class="icon">
-//             <i class="fa-regular fa-circle-question fa-1x"></i>
-//         </div>
-//         <div class="modal-card text-start">
-//             <div class="title-one">${recipent.value}</div>
-//             <div class="">
-//                 <div class="creation">created in ${inputDate.value}</div>
-//                 <div class="having my-1">${description.value}</div>
-//             </div>
-//             <div class="buttons my-1">
-//                 <span class="btn text-white bg-primary">${selectOption.value}</span>
-//                 <span class="btn  bg-light">${inputRadio.value}</span>
-//             </div>
-//         </div>
-//         </button>
-//    `
-//     }else{
-//         document.querySelector(".done-tasks").innerHTML += `
-//         <button class="rounded-top">
-//         <div class="icon">
-//             <i class="fa-regular fa-circle-question fa-1x"></i>
-//         </div>
-//         <div class="modal-card text-start">
-//             <div class="title-one">${recipent.value}</div>
-//             <div class="">
-//                 <div class="creation">created in ${inputDate.value}</div>
-//                 <div class="having my-1">${description.value}</div>
-//             </div>
-//             <div class="buttons my-1">
-//                 <span class="btn text-white bg-primary">${selectOption.value}</span>
-//                 <span class="btn  bg-light">${inputRadio.value}</span>
-//             </div>
-//         </div>
-//         </button>
-//    `
-//     }    
+    clearFormData();
    
 }
 
-function saveTask() {
-    // Recuperer task attributes a partir les champs input
+let modifyBtn = document.getElementById("modify");
+let deleteBtn = document.getElementById("delete");
 
-    // Créez task object
+modifyBtn.addEventListener("click", (e) =>{
+    console.log(e.target.parentElement.parentElement.parentElement.parentElement);
+});
 
-    // Ajoutez object au Array
 
-    // refresh tasks
-    
-}
 
-function editTask(index) {
-    // Initialisez task form
-
-    // Affichez updates
-
-    // Delete Button
-
-    // Définir l’index en entrée cachée pour l’utiliser en Update et Delete
-
-    // Definir FORM INPUTS
-
-    // Ouvrir Modal form
-}
-
-function updateTask() {
-    // GET TASK ATTRIBUTES FROM INPUTS
-
-    // Créez task object
-
-    // Remplacer ancienne task par nouvelle task
-
-    // Fermer Modal form
-
-    // Refresh tasks
-    
-}
-
-function deleteTask() {
-    // Get index of task in the array
-
-    // Remove task from array by index splice function
-
-    // close modal form
-
-    // refresh tasks
-}
-
-function initTaskForm() {
-    // Clear task form from data
-
-    // Hide all action buttons
-}
-
-function reloadTasks() {
-    // Remove tasks elements
-
-    // Set Task count
-}
