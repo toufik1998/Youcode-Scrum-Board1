@@ -7,6 +7,9 @@ let inputRadio = document.querySelector(".input-radio");
 let inputDate = document.getElementById("date");
 let selectOption = document.getElementById("inputGroupSelect");
 let selectPriority = document.querySelector(".select-priority");
+let openModal = document.getElementById("openModal");
+let updateBtn = document.getElementById("update-btn");
+let doneTaskContainer = document.getElementById("done-tasks");
 
 
 
@@ -170,9 +173,16 @@ var tasks = [
         'id': '',
     },
 ];
+
 var countTodo = 0;
-    var countProgresse = 0;
-    var countDone = 0;
+var countProgresse = 0;
+var countDone = 0;
+
+// counter  tasks in different status
+let todoStatus = document.getElementById("to-do-tasks-count");
+let progresseStatus = document.getElementById("progresse-tasks-count");
+let doneStatus = document.getElementById("done-tasks-count");
+
 
 readData();
 
@@ -184,86 +194,84 @@ function readData(){
     progresseTaskBtn.innerHTML = "";
     let doneTaskBtn = document.querySelector("#done-tasks");
     doneTaskBtn.innerHTML = "";
-
     var countTask = 0;
-
-    
+    countTodo = 0;
+    countProgresse = 0;
+    countDone = 0;
 
     for(let i = 0; i < tasks.length; i++){
         if(tasks[i].status == "To Do"){
             countTodo++;
             countTask++;
             todoTasksBtn.innerHTML += `
-            <button class="rounded-top" data-id="${i}">
+            <span class="btn text-white bg-danger w-100" id="delete" onclick="deleteTaskWith(${i})"></span>
+            <button class="rounded-top" data-id="${i}" onclick="editTask(${i})">
             <div class="icon">
                 <i class="fa-regular fa-circle-question fa-1x"></i>
-                <span class="btn text-white bg-danger rounded-pill" id="delete" onclick="deleteTaskWith(${i})"><i class="fa-solid fa-trash"></i></span>
             </div>
-            <div class="modal-card text-start">
+            <div class="modal-card text-start" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 <div class="title-one">${tasks[i].title}</div>
                 <div class="">
                     <div class="creation"><span id="order-card-todo">#${countTask}</span> created in ${tasks[i].date}</div>
                     <div class="having my-1">${tasks[i].description}</div>
                 </div>
-                <div class="buttons my-1 d-flex justify-content-between">
+                <div class="buttons my-1">
                     <span class="btn text-white bg-primary">${tasks[i].type}</span>
                     <span class="btn  bg-light">${tasks[i].priority}</span>
-                    <span class="btn text-white bg-info rounded-pill" id="modify"><i class="fa-sharp fa-solid fa-user-pen"></i></span>
                 </div>
             </div>
             </button>
        `
+       
        tasks[i].id = i;
     }else if(tasks[i].status == "In Progress"){
         countProgresse++;
         countTask++;
         document.querySelector("#progresse-tasks").innerHTML += `
-        <button class="rounded-top" data-id="${i}">
+        <span class="btn text-white bg-danger w-100" id="delete" onclick="deleteTaskWith(${i})"></span>
+        <button class="rounded-top" data-id="${i}" onclick="editTask(${i})">
         <div class="icon">
             <i class="fa-regular fa-circle-question fa-1x"></i>
-            <span class="btn text-white bg-danger rounded-pill" id="delete" onclick="deleteTaskWith(${i})"><i class="fa-solid fa-trash"></i></span>
         </div>
-        <div class="modal-card text-start">
+        <div class="modal-card text-start" data-bs-toggle="modal" data-bs-target="#exampleModal">
             <div class="title-one">${tasks[i].title}</div>
             <div class="">
                 <div class="creation"><span id="order-card-progress">#${countTask}</span> created in ${tasks[i].date}</div>
                 <div class="having my-1">${tasks[i].description}</div>
             </div>
-            <div class="buttons my-1 d-flex justify-content-between">
+            <div class="buttons my-1">
                 <span class="btn text-white bg-primary">${tasks[i].type}</span>
                 <span class="btn  bg-light">${tasks[i].priority}</span>
-                <span class="btn text-white bg-info rounded-pill" id="modify"><i class="fa-sharp fa-solid fa-user-pen"></i></span>
-                <span class="btn text-white bg-danger rounded-pill" id="delete"><i class="fa-solid fa-trash"></i></span>
             </div>
         </div>
         </button>
    `
+   
    tasks[i].id = i;
     }else{
         countDone++;
         countTask++;
         document.querySelector("#done-tasks").innerHTML += `
-        <button class="rounded-top" data-id="${i}">
+        <span class="btn text-white bg-danger w-100" id="delete" onclick="deleteTaskWith(${i})"></span>
+        <button class="rounded-top" data-id="${i}" onclick="editTask(${i})">
         <div class="icon">
             <i class="fa-regular fa-circle-question fa-1x"></i>
-            <span class="btn text-white bg-danger rounded-pill" id="delete" onclick="deleteTaskWith(${i})"><i class="fa-solid fa-trash"></i></span>
         </div>
-        <div class="modal-card text-start">
+        <div class="modal-card text-start" data-bs-toggle="modal" data-bs-target="#exampleModal">
             <div class="title-one">${tasks[i].title}</div>
             <div class="">
                 <div class="creation"><span id="order-card-done">#${countTask}</span> created in ${tasks[i].date}</div>
                 <div class="having my-1">${tasks[i].description}</div>
             </div>
-            <div class="buttons my-1 d-flex justify-content-between">
+            <div class="buttons my-1">
                 <span class="btn text-white bg-primary">${tasks[i].type}</span>
                 <span class="btn  bg-light">${tasks[i].priority}</span>
-                <span class="btn text-white bg-info rounded-pill" id="modify"><i class="fa-sharp fa-solid fa-user-pen"></i></span>
-                <span class="btn text-white bg-danger rounded-pill" id="delete"><i class="fa-solid fa-trash"></i></span>
-                
             </div>
         </div>
         </button>
    `
+   
+
    tasks[i].id = i;
   
 
@@ -323,7 +331,17 @@ function readData(){
     
     }
    
+    todoStatus.innerHTML = countTodo;
+    progresseStatus.textContent = countProgresse;
+    doneStatus.innerText = countDone;
 }
+
+function hideButtons() {
+    updateBtn.style.display = 'none';
+    addButton.style.display = 'block';
+    clearFormData();
+}
+
 function clearFormData() {
     recipent.value = '';
     selectPriority.value = '';
@@ -331,15 +349,10 @@ function clearFormData() {
     inputDate.value = '';
     description.value = '';
 }
-// counter  tasks in different status
-let todoStatus = document.getElementById("to-do-tasks-count");
-todoStatus.innerHTML = countTodo;
-let progresseStatus = document.getElementById("progresse-tasks-count");
-progresseStatus.textContent = countProgresse;
-let doneStatus = document.getElementById("done-tasks-count");
-doneStatus.innerText = countDone;
+
 
 function addTask() {
+
     closeBtn.click();
     const newTasks = {
         title: recipent.value,
@@ -357,14 +370,15 @@ function addTask() {
     }else{
         doneStatus.innerText = parseInt(doneStatus.innerText) + 1;
     }
+
     tasks.push(newTasks);
 
     readData();
 
     clearFormData();
-   
-}
+    
 
+}
 let modifyBtn = document.getElementById("modify");
 let deleteBtn = document.getElementById("delete");
 
@@ -373,21 +387,87 @@ let deleteBtn = document.getElementById("delete");
 // });
 
 function deleteTaskWith(id) {
-    for(let i = 0; i < tasks.length; i++){
-        if(id == tasks[i].id){
-            tasks.splice(id, 1);
-            if(tasks[i].status == "To Do"){
-                todoStatus.innerHTML = parseInt(todoStatus.innerHTML) - 1;
-            }else if(tasks[i].status == "In Progress"){
-                progresseStatus.textContent = parseInt(progresseStatus.textContent) - 1;
-            }else{
-                doneStatus.innerText = parseInt(doneStatus.innerText) - 1;
-            }
-            readData();
-        }
-    }
+    
+   
+
+
+    tasks.splice(id, 1);
+    // for(let i = 0; i < tasks.length; i++){
+    //     if(id + 1 == tasks[i].id){
+            
+    //         if(tasks[i].status == "To Do"){
+    //             if(doneTaskContainer.innerHTML == ""){
+    //                 console.log(true);
+    //             }
+    //         }else if(tasks[i].status == "In Progress"){
+    //             progresseStatus.textContent = parseInt(progresseStatus.textContent) - 1;
+    //         }else{
+    //             doneStatus.innerText = parseInt(doneStatus.innerText) - 1;
+    //         }
+    //     }
+    // }
+   
+    readData();
+
 
 }
 
 
+
+
+function editTask(id) {
+    addButton.style.display  = 'none';
+    updateBtn.style.display = "block";
+    let featureRadio = document.getElementById("feature");
+    let bugRadio = document.getElementById("bug");
+    console.log(inputRadio.value);
+    console.log(tasks[id].title);
+    recipent.value = tasks[id].title;
+    selectPriority.value = tasks[id].priority;
+    selectOption.value = tasks[id].status;
+    inputDate.value = tasks[id].date;
+    description.value = tasks[id].description;
+
+    if(featureRadio.value == tasks[id].type){
+        featureRadio.checked = true;
+    }else{
+        bugRadio.checked = true;
+    }
+
+    updateBtn.onclick = ()=>{
+        updateTask(id);
+    };
+
+}
+
+
+
+function updateTask(id) {
+    // const newTasks = {
+    //     title: recipent.value,
+    //     type: inputRadio.value,
+    //     priority: selectPriority.value,
+    //     status: selectOption.value,
+    //     date: inputDate.value,
+    //     description: description.value,
+    // }
+
+    tasks[id] = {
+        'title' : recipent.value,
+        'type' : inputRadio.value,
+        'priority': selectPriority.value,
+        'status': selectOption.value,
+        'date' : inputDate.value,
+        'description' : description.value,
+
+    }
+    //tasks.splice(id, 1);
+
+   // tasks.push(newTasks);
+
+    readData();
+
+    clearFormData();
+    closeBtn.click();
+}
 console.log(tasks);

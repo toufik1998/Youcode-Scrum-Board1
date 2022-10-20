@@ -30,7 +30,7 @@
 					</ol>
 				</div>
 				<div class="btn-group">
-					<button class="btn btn-info rounded-pill px-4" data-bs-toggle="modal" data-bs-target="#exampleModal"><a href="#" class="text-white"><i><i class="fa-sharp fa-solid fa-plus text-primary pe-2"></i></i> Add Task</a>
+					<button onclick="hideButtons()" class="btn btn-info rounded-pill px-4" id="openModal" data-bs-toggle="modal" data-bs-target="#exampleModal"><a href="#" class="text-white"><i><i class="fa-sharp fa-solid fa-plus text-primary pe-2"></i></i> Add Task</a>
 				</div>
 			</div>
 			<!-- BEGIN page-header -->
@@ -43,7 +43,7 @@
 				<div class="col-sm-12 col-md-6 col-lg-4 mb-3">
 					<div class="">
 						<div class=" text-white bg-dark rounded-top">
-							<h5 class="p-1 fs-6">To do (<span id="to-do-tasks-count"></span>)</h5>
+							<h5 class="p-1 fs-6">To do (<span id="to-do-tasks-count">0</span>)</h5>
 						</div>
 						<div class="tasks" id="to-do-tasks">
 							<!-- TO DO TASKS HERE -->
@@ -134,7 +134,7 @@
 				<div class="col-sm-12 col-md-6 col-lg-4 mb-3">
 					<div class="">
 						<div class=" text-white bg-dark rounded-top">
-							<h5 class="p-1 fs-6">In progresse (<span id="progresse-tasks-count"></span>)</h5>
+							<h5 class="p-1 fs-6">In progresse (<span id="progresse-tasks-count">0</span>)</h5>
 						</div>
 						<div class="tasks" id="progresse-tasks">
 							<!-- TO DO TASKS HERE -->
@@ -217,7 +217,7 @@
 				<div class="col-sm-12 col-md-6 col-lg-4 mb-3">
 					<div class="">
 						<div class=" text-white bg-dark rounded-top">
-							<h5 class="p-1 fs-6">Done (<span id="done-tasks-count"></span>)</h5>
+							<h5 class="p-1 fs-6">Done (<span id="done-tasks-count">0</span>)</h5>
 						</div>
 						<div class="tasks" id="done-tasks">
 							<!-- TO DO TASKS HERE -->
@@ -321,9 +321,9 @@
 					<div class="col-12">
 						<label for="" class="col-form-label">Type:</label>
 						<br>
-						<input class="input-radio" type="radio" id="feature" name="feature" value="feature">
+						<input class="input-radio" type="radio" id="feature" name="feature" value="Feature">
 						 <label for="feature">Feature</label><br>
-						 <input class="input-radio" type="radio" id="bug" name="bug" value="bug">
+						 <input class="input-radio" type="radio" id="bug" name="feature" value="Bug">
 						 <label for="bug">Bug</label><br>
 					</div>
 				</div>
@@ -333,9 +333,10 @@
 						<div class="input-group">
 							<select class="form-select select-priority" id="inputGroupSelect04" aria-label="Example select with button addon">
 							  <option >Please select...</option>
-							  <option value="Story">Story</option>
-							  <option value="Task">Task</option>
-							  <option value="Bug">Bug</option>
+							  <option value="Low">Low</option>
+							  <option value="Medium">Medium</option>
+							  <option value="High">High</option>
+							  <option value="Critical">Critical</option>
 							</select>
 						  </div>
 					</div>
@@ -372,6 +373,7 @@
 		<div class="modal-footer">
 			<button type="button" class="btn btn-light border-secondary" data-bs-dismiss="modal">Close</button>
 			<button type="button" id="add-btn" class="btn btn-primary" onclick="addTask()">Add</button>
+			<button type="button" id="update-btn"  class="btn btn-primary">Update</button>
 		</div>
 		</div>
 	</div>
