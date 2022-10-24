@@ -186,7 +186,7 @@ let doneStatus = document.getElementById("done-tasks-count");
 
 readData();
 
-
+// Show data function
 function readData(){
     let todoTasksBtn = document.querySelector("#to-do-tasks");
     todoTasksBtn.innerHTML = "";
@@ -204,12 +204,12 @@ function readData(){
             countTodo++;
             countTask++;
             todoTasksBtn.innerHTML += `
-            <span class="btn text-white bg-danger w-100" id="delete" onclick="deleteTaskWith(${i})"></span>
-            <button class="rounded-top" data-id="${i}" onclick="editTask(${i})">
+            <button class="rounded-top">
             <div class="icon">
                 <i class="fa-regular fa-circle-question fa-1x"></i>
+                <i class="fa-solid fa-trash text-danger" id="delete" onclick="deleteTaskWith(${i})"></i>
             </div>
-            <div class="modal-card text-start" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <div class="modal-card text-start" data-bs-toggle="modal" data-bs-target="#exampleModal" data-id="${i}" onclick="editTask(${i})">
                 <div class="title-one">${tasks[i].title}</div>
                 <div class="">
                     <div class="creation"><span id="order-card-todo">#${countTask}</span> created in ${tasks[i].date}</div>
@@ -228,12 +228,12 @@ function readData(){
         countProgresse++;
         countTask++;
         document.querySelector("#progresse-tasks").innerHTML += `
-        <span class="btn text-white bg-danger w-100" id="delete" onclick="deleteTaskWith(${i})"></span>
-        <button class="rounded-top" data-id="${i}" onclick="editTask(${i})">
+        <button class="rounded-top" >
         <div class="icon">
             <i class="fa-regular fa-circle-question fa-1x"></i>
+            <i class="fa-solid fa-trash text-danger" id="delete" onclick="deleteTaskWith(${i})"></i>
         </div>
-        <div class="modal-card text-start" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <div class="modal-card text-start" data-bs-toggle="modal" data-bs-target="#exampleModal" data-id="${i}" onclick="editTask(${i})">
             <div class="title-one">${tasks[i].title}</div>
             <div class="">
                 <div class="creation"><span id="order-card-progress">#${countTask}</span> created in ${tasks[i].date}</div>
@@ -252,12 +252,12 @@ function readData(){
         countDone++;
         countTask++;
         document.querySelector("#done-tasks").innerHTML += `
-        <span class="btn text-white bg-danger w-100" id="delete" onclick="deleteTaskWith(${i})"></span>
-        <button class="rounded-top" data-id="${i}" onclick="editTask(${i})">
+        <button class="rounded-top">
         <div class="icon">
             <i class="fa-regular fa-circle-question fa-1x"></i>
+            <i class="fa-solid fa-trash text-danger" id="delete" onclick="deleteTaskWith(${i})"></i>
         </div>
-        <div class="modal-card text-start" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <div class="modal-card text-start" data-bs-toggle="modal" data-bs-target="#exampleModal" data-id="${i}" onclick="editTask(${i})">
             <div class="title-one">${tasks[i].title}</div>
             <div class="">
                 <div class="creation"><span id="order-card-done">#${countTask}</span> created in ${tasks[i].date}</div>
@@ -273,59 +273,6 @@ function readData(){
    
 
    tasks[i].id = i;
-  
-
-// Example without using template literalals (ecmaScript6)
-   // main container     
-//    let mainButton = document.createElement("button");
-//    mainButton.classList.add('rounded-top');
-
-//    // container of icon
-//    let containerIcon = document.createElement("div");
-//    let icon = document.createElement("i");
-//    containerIcon.classList.add('icon');
-//    icon.classList.add('fa-regular', 'fa-circle-question', 'fa-1x');
-//    containerIcon.appendChild(icon);
-//    mainButton.appendChild(containerIcon); 
-
-//    // create title
-//    let title = document.createElement("div");
-//    title.classList.add('title-one');
-//    let titleText = document.createTextNode(tasks[i].title);
-
-//     // create container of card body
-//    let card = document.createElement("div");
-//    card.classList.add('modal-card', 'text-start');
-
-//    // add text to title
-//    title.appendChild(titleText);
-//     // add ttile to button container
-//     card.appendChild(title);
-
-//     // creat container of date and description
-//     let div = document.createElement("div");
-//     let creation = document.createElement("div");
-//     creation.classList.add('creation');
-//     let creationText = document.createTextNode(tasks[i].date);
-//     creation.appendChild(creationText);
-//     div.appendChild(creation);
-//     card.appendChild(div);
-
-
-
-//     let description = document.createElement("div");
-//     description.classList.add('having', 'my-1');
-//     let descriptionText = document.createTextNode(tasks[i].description);
-//     description.appendChild(descriptionText);
-//     card.appendChild(description);
-
-//     mainButton.appendChild(card);
-//     document.querySelector("#done-tasks").appendChild(mainButton);
-//     console.log(mainButton);
-
-
-
-
     
     }
     
@@ -382,33 +329,10 @@ function addTask() {
 let modifyBtn = document.getElementById("modify");
 let deleteBtn = document.getElementById("delete");
 
-// modifyBtn.addEventListener("click", (e) =>{
-//     console.log(e.target.parentElement.parentElement.parentElement.parentElement);
-// });
-
 function deleteTaskWith(id) {
-    
-   
-
-
     tasks.splice(id, 1);
-    // for(let i = 0; i < tasks.length; i++){
-    //     if(id + 1 == tasks[i].id){
-            
-    //         if(tasks[i].status == "To Do"){
-    //             if(doneTaskContainer.innerHTML == ""){
-    //                 console.log(true);
-    //             }
-    //         }else if(tasks[i].status == "In Progress"){
-    //             progresseStatus.textContent = parseInt(progresseStatus.textContent) - 1;
-    //         }else{
-    //             doneStatus.innerText = parseInt(doneStatus.innerText) - 1;
-    //         }
-    //     }
-    // }
    
     readData();
-
 
 }
 
@@ -443,14 +367,6 @@ function editTask(id) {
 
 
 function updateTask(id) {
-    // const newTasks = {
-    //     title: recipent.value,
-    //     type: inputRadio.value,
-    //     priority: selectPriority.value,
-    //     status: selectOption.value,
-    //     date: inputDate.value,
-    //     description: description.value,
-    // }
 
     tasks[id] = {
         'title' : recipent.value,
@@ -461,13 +377,9 @@ function updateTask(id) {
         'description' : description.value,
 
     }
-    //tasks.splice(id, 1);
-
-   // tasks.push(newTasks);
 
     readData();
 
     clearFormData();
     closeBtn.click();
 }
-console.log(tasks);
